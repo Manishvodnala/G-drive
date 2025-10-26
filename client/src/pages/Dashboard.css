@@ -1,0 +1,104 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.dashboard-header {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header div {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.status-toggle {
+  text-align: center;
+}
+
+.status-toggle p {
+  margin-bottom: 15px;
+}
+
+.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.earnings-grid div {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.earnings-grid h4 {
+  color: #28a745;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.ride-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.ride-request {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.ride-request button {
+  margin-top: 10px;
+}
+
+.ride-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.ride-item {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.ride-item p {
+  margin-bottom: 5px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.fare-estimate {
+  margin: 20px 0;
+  padding: 15px;
+  background: #e7f5ff;
+  border-radius: 8px;
+}
+
+.fare-estimate h4 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
