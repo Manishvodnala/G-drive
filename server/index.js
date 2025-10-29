@@ -41,7 +41,7 @@ require('./sockets/locationSocket')(io);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Taxi Platform API is running' });
+  res.json({ status: 'OK', message: 'Get It API is running' });
 });
 
 // Error handling middleware

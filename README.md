@@ -1,6 +1,6 @@
-# Taxi Hailing Platform
+# Get It - Ride Hailing Platform
 
-A comprehensive, full-stack taxi/ride-hailing platform built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring real-time location tracking, driver-rider matching, and payment integration.
+A comprehensive, full-stack ride-hailing platform built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring real-time location tracking, driver-rider matching, and payment integration.
 
 ## Features
 

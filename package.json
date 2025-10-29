@@ -1,7 +1,7 @@
 {
-  "name": "taxi-hailing-platform",
+  "name": "get-it",
   "version": "1.0.0",
-  "description": "A comprehensive taxi hailing platform with real-time tracking and ride matching",
+  "description": "Get It - A modern ride-hailing platform with real-time tracking and ride matching",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
@@ -11,7 +11,7 @@
     "build": "cd client && npm run build",
     "install-all": "npm install && cd client && npm install"
   },
-  "keywords": ["taxi", "ride-hailing", "uber-clone", "real-time", "socket.io"],
+  "keywords": ["get-it", "ride-hailing", "taxi", "real-time", "socket.io"],
   "author": "",
   "license": "MIT",
   "dependencies": {

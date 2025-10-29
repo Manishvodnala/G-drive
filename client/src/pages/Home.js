@@ -6,8 +6,8 @@ const Home = () => {
   return (
     <div className="home">
       <div className="hero">
-        <h1>Welcome to Taxi Platform</h1>
-        <p>Your reliable ride-hailing solution</p>
+        <h1>Welcome to Get It</h1>
+        <p>Your modern ride-hailing solution - Get rides instantly!</p>
         <div className="hero-buttons">
           <Link to="/login" className="btn btn-primary">Login</Link>
           <Link to="/register" className="btn btn-success">Register</Link>
