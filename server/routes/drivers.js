@@ -3,9 +3,9 @@ const router = express.Router();
 const driverController = require('../controllers/driverController');
 const { protect, authorize } = require('../middleware/auth');
 
-// All routes require authentication
+// All routes require authentication and must belong to a driver (admins allowed for oversight)
 router.use(protect);
-router.use(authorize('driver'));
+router.use(authorize('driver', 'admin'));
 
 // Driver profile routes
 router.get('/profile', driverController.getProfile);
