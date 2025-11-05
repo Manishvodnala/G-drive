@@ -237,8 +237,12 @@ exports.updateRideStatus = async (req, res) => {
       });
     }
 
-    // Check authorization
-    if (req.user.role === 'driver' && ride.driver.toString() !== req.user._id.toString()) {
+    const rideDriverId = ride.driver ? ride.driver.toString() : null;
+    const isDriver = req.user.role === 'driver' && rideDriverId === req.user._id.toString();
+    const isRider = ride.rider.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin';
+
+    if (!isDriver && !isRider && !isAdmin) {
       return res.status(403).json({
         success: false,
         message: 'Not authorized'
@@ -250,11 +254,23 @@ exports.updateRideStatus = async (req, res) => {
     if (status === 'arrived') ride.arrivedAt = new Date();
     if (status === 'in-progress') ride.startedAt = new Date();
     if (status === 'completed') {
+      if (!rideDriverId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Ride has no assigned driver'
+        });
+      }
       ride.completedAt = new Date();
       ride.payment.status = 'completed';
 
       // Update driver stats
       const driver = await Driver.findById(ride.driver);
+      if (!driver) {
+        return res.status(404).json({
+          success: false,
+          message: 'Assigned driver not found'
+        });
+      }
       driver.totalRides += 1;
       driver.currentRide = null;
       driver.isAvailable = true;
@@ -486,6 +502,24 @@ exports.trackRide = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: 'Ride not found'
+      });
+    }
+
+    const rideDriverId = ride.driver
+      ? (ride.driver._id ? ride.driver._id.toString() : ride.driver.toString())
+      : null;
+    const rideRiderId = ride.rider
+      ? (ride.rider._id ? ride.rider._id.toString() : ride.rider.toString())
+      : null;
+
+    const isDriver = req.user.role === 'driver' && rideDriverId === req.user._id.toString();
+    const isRider = rideRiderId === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin';
+
+    if (!isDriver && !isRider && !isAdmin) {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized'
       });
     }
 

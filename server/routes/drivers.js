@@ -5,6 +5,7 @@ const { protect, authorize } = require('../middleware/auth');
 
 // All routes require authentication
 router.use(protect);
+router.use(authorize('driver'));
 
 // Driver profile routes
 router.get('/profile', driverController.getProfile);

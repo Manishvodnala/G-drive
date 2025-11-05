@@ -119,6 +119,13 @@ exports.getPaymentHistory = async (req, res) => {
 // Initiate refund (admin or system)
 exports.initiateRefund = async (req, res) => {
   try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized'
+      });
+    }
+
     const { rideId, reason } = req.body;
 
     const ride = await Ride.findById(rideId);

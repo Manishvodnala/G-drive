@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const paymentController = require('../controllers/paymentController');
-const { protect } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 // All routes require authentication
 router.use(protect);
@@ -10,6 +10,6 @@ router.use(protect);
 router.post('/process', paymentController.processPayment);
 router.get('/history', paymentController.getPaymentHistory);
 router.get('/methods', paymentController.getPaymentMethods);
-router.post('/refund', paymentController.initiateRefund);
+router.post('/refund', authorize('admin'), paymentController.initiateRefund);
 
 module.exports = router;
