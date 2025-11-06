@@ -237,15 +237,29 @@ exports.updateRideStatus = async (req, res) => {
       });
     }
 
-    const rideDriverId = ride.driver ? ride.driver.toString() : null;
-    const isDriver = req.user.role === 'driver' && rideDriverId === req.user._id.toString();
-    const isRider = ride.rider.toString() === req.user._id.toString();
+    const userId = req.user._id.toString();
+    const rideDriverId = ride.driver
+      ? (ride.driver._id ? ride.driver._id.toString() : ride.driver.toString())
+      : null;
+    const rideRiderId = ride.rider
+      ? (ride.rider._id ? ride.rider._id.toString() : ride.rider.toString())
+      : null;
+
+    const isDriver = rideDriverId && req.user.role === 'driver' && rideDriverId === userId;
+    const isRider = rideRiderId === userId;
     const isAdmin = req.user.role === 'admin';
 
     if (!isDriver && !isRider && !isAdmin) {
       return res.status(403).json({
         success: false,
         message: 'Not authorized'
+      });
+    }
+
+    if ((status === 'arrived' || status === 'in-progress') && !isDriver && !isAdmin) {
+      return res.status(403).json({
+        success: false,
+        message: 'Only the assigned driver can update this status'
       });
     }
 
@@ -505,6 +519,7 @@ exports.trackRide = async (req, res) => {
       });
     }
 
+    const userId = req.user._id.toString();
     const rideDriverId = ride.driver
       ? (ride.driver._id ? ride.driver._id.toString() : ride.driver.toString())
       : null;
@@ -512,8 +527,8 @@ exports.trackRide = async (req, res) => {
       ? (ride.rider._id ? ride.rider._id.toString() : ride.rider.toString())
       : null;
 
-    const isDriver = req.user.role === 'driver' && rideDriverId === req.user._id.toString();
-    const isRider = rideRiderId === req.user._id.toString();
+    const isDriver = rideDriverId && req.user.role === 'driver' && rideDriverId === userId;
+    const isRider = rideRiderId === userId;
     const isAdmin = req.user.role === 'admin';
 
     if (!isDriver && !isRider && !isAdmin) {
